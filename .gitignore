@@ -44,3 +44,4 @@ build/
 
 ### GCP Files ###
 **/*.col
+!**/src/test/**/*.col

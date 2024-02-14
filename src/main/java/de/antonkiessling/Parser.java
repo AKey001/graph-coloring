@@ -1,6 +1,5 @@
 package de.antonkiessling;
 
-import de.antonkiessling.model.Graph;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 
@@ -10,25 +9,24 @@ import java.util.*;
 
 public class Parser {
 
-    public Graph parse(File file) throws IOException {
-        Graph graph = new Graph();
+    public int[][] parse(File file) throws IOException {
+        int vertices = 0;
 
         LineIterator iterator = FileUtils.lineIterator(file);
-        String line = null;
+        String line;
         while (iterator.hasNext()) {
             line = iterator.nextLine();
 
             if (line.contains("p edge")) {
                 String[] counts = line.split(" ");
-                graph.setVertices(Integer.parseInt(counts[2]));
-                graph.setEdges(Integer.parseInt(counts[3]));
+                vertices = Integer.parseInt(counts[2]);
                 break;
             }
         }
 
         Map<Integer, int[]> verticesEdges = new HashMap<>();
-        for (int i = 0; i < graph.getVertices(); i++) {
-            verticesEdges.put(i, new int[graph.getVertices()]);
+        for (int i = 0; i < vertices; i++) {
+            verticesEdges.put(i, new int[vertices]);
         }
 
         while (iterator.hasNext()) {
@@ -42,12 +40,11 @@ public class Parser {
             verticesEdges.get(end)[start] = 1;
         }
 
-        int[][] graphEdges = new int[graph.getVertices()][graph.getVertices()];
-        for (int i = 0; i < graph.getVertices(); i++) {
+        int[][] graph = new int[vertices][vertices];
+        for (int i = 0; i < vertices; i++) {
             int[] neighbors = verticesEdges.get(i);
-            graphEdges[i] = neighbors;
+            graph[i] = neighbors;
         }
-        graph.setGraph(graphEdges);
 
         return graph;
     }
