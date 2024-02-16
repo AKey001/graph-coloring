@@ -5,7 +5,8 @@ import org.apache.commons.io.LineIterator;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Parser {
 
@@ -31,13 +32,15 @@ public class Parser {
 
         while (iterator.hasNext()) {
             line = iterator.nextLine();
-            String[] edge = line.split(" ");
+            if (line.startsWith("e ")) {
+                String[] edge = line.split(" ");
 
-            int start = Integer.parseInt(edge[1]) - 1;
-            int end = Integer.parseInt(edge[2]) - 1;
+                int start = Integer.parseInt(edge[1]) - 1;
+                int end = Integer.parseInt(edge[2]) - 1;
 
-            verticesEdges.get(start)[end] = 1;
-            verticesEdges.get(end)[start] = 1;
+                verticesEdges.get(start)[end] = 1;
+                verticesEdges.get(end)[start] = 1;
+            }
         }
 
         int[][] graph = new int[vertices][vertices];

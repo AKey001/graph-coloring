@@ -1,4 +1,4 @@
-package de.antonkiessling;
+package de.antonkiessling.model;
 
 public class Solution {
     private int chromaticNumber;

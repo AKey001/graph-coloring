@@ -1,11 +1,11 @@
 import de.antonkiessling.GCP;
 import de.antonkiessling.Parser;
-import de.antonkiessling.Solution;
+import de.antonkiessling.model.Heuristic;
+import de.antonkiessling.model.Solution;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +24,7 @@ class GCPTest {
                 {0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
                 {0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
                 {0, 0, 1, 0, 0, 0, 0, 1, 1, 0}};
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {1, 2, 2, 2, 3, 1, 3, 1, 1, 3};
         assertTrue(gcp.isFeasible(colors));
@@ -43,7 +43,7 @@ class GCPTest {
                 {0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
                 {0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
                 {0, 0, 1, 0, 0, 0, 0, 1, 1, 0}};
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {1, 2, 2, 2, 3, 1, 2, 1, 1, 3};
         assertFalse(gcp.isFeasible(colors));
@@ -61,7 +61,7 @@ class GCPTest {
                 {0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
                 {0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
                 {0, 0, 1, 0, 0, 0, 0, 1, 1, 0}};
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {1, 0, 2, 0, 3, 1, 3, 0, 0, 0};
         assertTrue(gcp.isFeasible(colors));
@@ -80,7 +80,7 @@ class GCPTest {
                 {0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
                 {0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
                 {0, 0, 1, 0, 0, 0, 0, 1, 1, 0}};
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {0, 2, 0, 2, 3, 1, 2, 0, 0, 0};
         assertFalse(gcp.isFeasible(colors));
@@ -91,7 +91,7 @@ class GCPTest {
         Parser parser = new Parser();
         int[][] graph = parser.parse(new File("instances/queen5_5.col"));
 
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {1, 2, 3, 4, 5, 3,  4,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0};
         assertTrue(gcp.isFeasible(colors));
@@ -102,7 +102,7 @@ class GCPTest {
         Parser parser = new Parser();
         int[][] graph = parser.parse(new File("instances/queen5_5.col"));
 
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {1, 2, 3, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0};
         assertTrue(gcp.isFeasible(colors));
@@ -121,7 +121,7 @@ class GCPTest {
                 {0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
                 {0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
                 {0, 0, 1, 0, 0, 0, 0, 1, 1, 0}};
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {1, 2, 2, 2, 3, 1, 3, 1, 1, 3};
         assertTrue(gcp.isSolution(colors));
@@ -140,7 +140,7 @@ class GCPTest {
                 {0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
                 {0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
                 {0, 0, 1, 0, 0, 0, 0, 1, 1, 0}};
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {1, 2, 2, 2, 3, 1, 2, 1, 1, 3};
         assertFalse(gcp.isSolution(colors));
@@ -158,7 +158,7 @@ class GCPTest {
                 {0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
                 {0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
                 {0, 0, 1, 0, 0, 0, 0, 1, 1, 0}};
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {1, 0, 2, 0, 3, 1, 3, 0, 0, 0};
         assertFalse(gcp.isSolution(colors));
@@ -177,7 +177,7 @@ class GCPTest {
                 {0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
                 {0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
                 {0, 0, 1, 0, 0, 0, 0, 1, 1, 0}};
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {0, 2, 0, 2, 3, 1, 2, 0, 0, 0};
         assertFalse(gcp.isSolution(colors));
@@ -188,7 +188,7 @@ class GCPTest {
         Parser parser = new Parser();
         int[][] graph = parser.parse(new File("instances/queen5_5.col"));
 
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {1, 2, 1, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0};
         assertFalse(gcp.isSolution(colors));
@@ -199,7 +199,7 @@ class GCPTest {
         Parser parser = new Parser();
         int[][] graph = parser.parse(new File("instances/queen5_5.col"));
 
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
         int[] colors = {1, 2, 3, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0};
         assertFalse(gcp.isSolution(colors));
@@ -210,9 +210,9 @@ class GCPTest {
         Parser parser = new Parser();
         int[][] graph = parser.parse(new File("instances/queen5_5.col"));
 
-        GCP gcp = new GCP(graph);
+        GCP gcp = new GCP(graph, Heuristic.NAIVE);
 
-        Solution solution = gcp.solve(IntStream.range(0, graph.length).toArray());
+        Solution solution = gcp.solve();
 
         assertEquals(5, solution.getChromaticNumber());
     }
